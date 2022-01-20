@@ -1,0 +1,32 @@
+.navbar{
+
+    margin: 30px 0 50px 0;
+    border-radius: 16px;
+}
+
+.bg-light{
+    background-color: rgb(248, 185, 101) !important;
+}
+
+.navbar button{
+    border: none;
+    background-color: transparent;
+}
+
+.navbar .cartImage{
+    width: 50%;
+    position: relative;
+    right: 40px;
+}
+
+.navbar .logoImage{
+    padding: 0 20px 0 0;
+}
+
+.navbar h2{
+    font-size: 18px;
+}
+
+.navbar .itemsNav:hover{
+    text-decoration: underline;
+}
