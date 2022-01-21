@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
+import Title from './components/itemListContainer/itemListContainer';
 
 function App() {
   return (
@@ -8,9 +9,7 @@ function App() {
 
         <NavBar />
 
-        <p>
-          E-Commerce App
-        </p>
+        <Title title='App en desarrollo' icon="./itemListContainer/iconTitle.png"/>
     </div>
   );
 }

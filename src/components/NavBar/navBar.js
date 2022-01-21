@@ -9,7 +9,6 @@ const navBar = () => {
     return (
         <div>
             <Navbar
-                color="light"
                 expand="md"
                 light
             >

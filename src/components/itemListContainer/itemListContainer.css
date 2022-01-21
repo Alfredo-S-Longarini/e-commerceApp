@@ -1,0 +1,10 @@
+.titleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconTitle{
+    width: 8%;
+    margin: 0 0 0 30px;
+}
