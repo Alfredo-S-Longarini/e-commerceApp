@@ -1,15 +1,17 @@
 // import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
-import Title from './components/itemListContainer/itemListContainer';
+import ItemListContainer from './components/itemListContainer/itemListContainer';
 
-function App() {
+const App = () => {
+
   return (
     <div className="App">
 
         <NavBar />
 
-        <Title title='App en desarrollo' icon="./itemListContainer/iconTitle.png"/>
+        <ItemListContainer title='App en desarrollo'/>
     </div>
   );
 }
