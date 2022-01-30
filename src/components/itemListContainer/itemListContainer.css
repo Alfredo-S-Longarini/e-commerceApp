@@ -1,23 +1,6 @@
-.titleContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.iconTitle{
-    width: 8%;
-    margin: 0 0 0 30px;
-}
-
 .center{
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-}
-
-.CounterSection{
-    background-color: rgb(248, 185, 101);
-    width: 25%;
-    border-radius: 16px;
-    padding: 10px 0;
+    justify-content: center;
 }

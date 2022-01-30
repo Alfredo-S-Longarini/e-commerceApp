@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
-import ItemListContainer from './components/itemListContainer/itemListContainer';
+import ItemListContainer from './components/ItemListContainer/itemListContainer';
 
 const App = () => {
 
@@ -11,7 +11,8 @@ const App = () => {
 
         <NavBar />
 
-        <ItemListContainer title='App en desarrollo'/>
+        <ItemListContainer/>
+
     </div>
   );
 }
