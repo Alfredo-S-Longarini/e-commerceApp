@@ -26,3 +26,8 @@
     border-radius: 16px;
     padding: 10px 0;
 }
+
+.buttonInfo{
+    color: black !important;
+    margin: 10px 0;
+}

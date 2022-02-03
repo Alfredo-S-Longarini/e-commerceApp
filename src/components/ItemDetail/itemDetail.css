@@ -1,0 +1,10 @@
+.cardsDetails{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.subtitleDetails{
+    color: rgb(250, 160, 43);
+}

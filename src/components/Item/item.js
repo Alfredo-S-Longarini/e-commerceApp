@@ -71,7 +71,9 @@ const Item = ({ producto, stockProducto }) => {
                     <InputGroupText>{counter}</InputGroupText>
                     <Button disabled={buttonAdd} onClick={agregarProducto}>+</Button>
                 </InputGroup>
+
             </CardBody>
+
             <CardFooter className="text-muted">
                 Stock: {producto.stock}
             </CardFooter>
