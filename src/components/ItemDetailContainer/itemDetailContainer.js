@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ItemListDetails from '../ItemListDetails/itemListDetails';
+import ItemDetail from '../ItemDetail/itemDetail'
 import productos from '../../productos/productos.js';
 import Spinner from '../LoadingSpinner/loadingSpinner.js';
 
 import './itemDetailContainer.css'
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({prodId}) => {
 
     const [productInfo, setProductInfo] = useState([]);
     const [loading, setLoading]=useState(true);
@@ -13,10 +13,11 @@ const ItemDetailContainer = () => {
     useEffect(()=>{
 
         const promiseProduct = new Promise((resolve, reject) => {
-        setTimeout(()=>{
-            resolve(productos);
-            setLoading(false);
-        }, 2000);
+            setTimeout(()=>{
+                let prod = productos.find(element => element.id === prodId);
+                resolve(prod);
+                setLoading(false);
+            }, 2000);
         })
 
         promiseProduct.then((res)=>{setProductInfo(res)}).catch((err)=> {console.log(err)});
@@ -28,7 +29,7 @@ const ItemDetailContainer = () => {
     return (
         <div className='centerDetails'>
 
-            {loading ? <Spinner/> : <ItemListDetails products={productInfo}></ItemListDetails>}
+            {loading ? <Spinner/> : <ItemDetail products={productInfo}></ItemDetail>}
 
         </div>
     );

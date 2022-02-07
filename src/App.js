@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
 import ItemListContainer from './components/ItemListContainer/itemListContainer';
-import ItemDetailContainer from './components/ItemDetailContainer/itemDetailContainer';
+
 
 const App = () => {
 
@@ -13,8 +13,6 @@ const App = () => {
         <NavBar />
 
         <ItemListContainer/>
-
-        <ItemDetailContainer/>
 
     </div>
   );

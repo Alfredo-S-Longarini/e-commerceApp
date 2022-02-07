@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { InputGroup, Button, InputGroupText, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from 'reactstrap';
+import ItemDetailContainer from '../ItemDetailContainer/itemDetailContainer';
 import './item.css';
 
 const Item = ({ producto, stockProducto }) => {
@@ -55,29 +56,35 @@ const Item = ({ producto, stockProducto }) => {
     }
 
     return (
-        <Card className='cardProducto'>
-            <CardImg
-                className='imgProducto'
-                alt={producto.name}
-                src={producto.imgUrl}
-                top
-            />
-            <CardBody>
-                <CardTitle tag="h5">{producto.name}</CardTitle>
-                <CardSubtitle className="mb-2 text-muted" tag="h6">{producto.precio}</CardSubtitle>
-                <CardText> </CardText>
-                <InputGroup>
-                    <Button disabled={buttonRemove} onClick={quitarProducto}>-</Button>
-                    <InputGroupText>{counter}</InputGroupText>
-                    <Button disabled={buttonAdd} onClick={agregarProducto}>+</Button>
-                </InputGroup>
+        <>
+            <Card className='cardProducto'>
+                <CardImg
+                    className='imgProducto'
+                    alt={producto.name}
+                    src={producto.imgUrl}
+                    top
+                />
+                <CardBody>
+                    <CardTitle tag="h5">{producto.name}</CardTitle>
+                    <CardSubtitle className="mb-2 text-muted" tag="h6">{producto.precio}</CardSubtitle>
+                    <CardText> </CardText>
+                    <InputGroup>
+                        <Button disabled={buttonRemove} onClick={quitarProducto}>-</Button>
+                        <InputGroupText>{counter}</InputGroupText>
+                        <Button disabled={buttonAdd} onClick={agregarProducto}>+</Button>
+                    </InputGroup>
 
-            </CardBody>
+                </CardBody>
 
-            <CardFooter className="text-muted">
-                Stock: {producto.stock}
-            </CardFooter>
-        </Card>
+                <CardFooter className="text-muted">
+                    Stock: {producto.stock}
+                </CardFooter>
+
+                <ItemDetailContainer prodId={producto.id}/>
+                
+            </Card>
+
+        </>
     );
 }
 
