@@ -4,17 +4,22 @@ import productos from '../../productos/productos.js';
 import Spinner from '../LoadingSpinner/loadingSpinner.js';
 
 import './itemDetailContainer.css'
+import { useParams } from 'react-router-dom';
 
-const ItemDetailContainer = ({prodId}) => {
+const ItemDetailContainer = () => {
 
     const [productInfo, setProductInfo] = useState([]);
     const [loading, setLoading]=useState(true);
+
+    let id = useParams();
+    let prodId=id.id;
+    console.log(prodId);
 
     useEffect(()=>{
 
         const promiseProduct = new Promise((resolve, reject) => {
             setTimeout(()=>{
-                let prod = productos.find(element => element.id === prodId);
+                let prod = productos.find(element => element.id == prodId);
                 resolve(prod);
                 setLoading(false);
             }, 2000);
@@ -22,9 +27,9 @@ const ItemDetailContainer = ({prodId}) => {
 
         promiseProduct.then((res)=>{setProductInfo(res)}).catch((err)=> {console.log(err)});
 
-        console.log(productInfo);
-
     },[]);
+
+    console.log(productInfo);
 
     return (
         <div className='centerDetails'>

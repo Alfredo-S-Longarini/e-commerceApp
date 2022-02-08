@@ -1,6 +1,16 @@
 .center{
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
+}
+
+.seccionesProd{
+    border-right: 1px solid gray;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoryFilter{
+    border-right: 1px solid gray;
 }

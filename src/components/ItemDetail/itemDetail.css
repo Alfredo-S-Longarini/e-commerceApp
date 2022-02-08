@@ -4,6 +4,14 @@
     margin: 0 10px;
 }
 
+.titleProd{
+    margin: 0 0 50px 0;
+}
+
+.prodPago{
+    margin: 0 0 50px 0;
+}
+
 .subtitleDetails{
     color: rgb(250, 160, 43);
 }
@@ -13,4 +21,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.infoProd{
+    position: relative;
+    left: 25%;
+    margin: 0 0 50px 0;
+    border: 1px solid rgb(207, 207, 207);
+    width: 50%;
+}
+
+.buttonsSeccion{
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    position: relative;
+    left: 25%;
+}
+
+.buttonsSeccion button{
+    margin: 0 20px;
+}
+
+.imagenProd{
+    border-right: 1px solid rgb(207, 207, 207);
 }

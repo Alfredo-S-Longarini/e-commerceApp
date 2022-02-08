@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { InputGroup, Button, InputGroupText, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from 'reactstrap';
-import ItemDetailContainer from '../ItemDetailContainer/itemDetailContainer';
 import './item.css';
 
 const Item = ({ producto, stockProducto }) => {
@@ -56,35 +56,35 @@ const Item = ({ producto, stockProducto }) => {
     }
 
     return (
-        <>
-            <Card className='cardProducto'>
-                <CardImg
-                    className='imgProducto'
-                    alt={producto.name}
-                    src={producto.imgUrl}
-                    top
-                />
-                <CardBody>
-                    <CardTitle tag="h5">{producto.name}</CardTitle>
-                    <CardSubtitle className="mb-2 text-muted" tag="h6">{producto.precio}</CardSubtitle>
-                    <CardText> </CardText>
-                    <InputGroup>
-                        <Button disabled={buttonRemove} onClick={quitarProducto}>-</Button>
-                        <InputGroupText>{counter}</InputGroupText>
-                        <Button disabled={buttonAdd} onClick={agregarProducto}>+</Button>
-                    </InputGroup>
+        <div style={{margin:'20px 20px', width:'20%'}}>  
+            <Link to={`/item/${producto.id}`} style={{textDecoration:'none'}}>
+                <Card className='cardProducto'>
+                    <CardImg
+                        className='imgProducto'
+                        alt={producto.name}
+                        src={producto.imgUrl}
+                        top
+                    />
+                    <CardBody>
 
-                </CardBody>
+                        <CardTitle tag="h5">{producto.name}</CardTitle>
+                        <CardSubtitle className="mb-2 text-muted" tag="h6">{producto.precio}</CardSubtitle>
+                        <CardText> </CardText>
 
-                <CardFooter className="text-muted">
-                    Stock: {producto.stock}
-                </CardFooter>
+                    </CardBody>
 
-                <ItemDetailContainer prodId={producto.id}/>
-                
-            </Card>
-
-        </>
+                    <CardFooter className="text-muted">
+                        Stock: {producto.stock}
+                    </CardFooter>
+                    
+                </Card>
+            </Link>
+            <InputGroup >
+                <Button disabled={buttonRemove} onClick={quitarProducto}>-</Button>
+                <InputGroupText>{counter}</InputGroupText>
+                <Button disabled={buttonAdd} onClick={agregarProducto}>+</Button>
+            </InputGroup>
+        </div>
     );
 }
 

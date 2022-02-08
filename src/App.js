@@ -1,20 +1,33 @@
 // import logo from './logo.svg';
 import React from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
 import ItemListContainer from './components/ItemListContainer/itemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer/itemDetailContainer';
+import Compras from './views/Compras/compras';
+import Favoritos from './views/Favoritos/favoritos';
 
 
 const App = () => {
 
   return (
-    <div className="App">
+    <BrowserRouter>
+      <div className="App">
 
-        <NavBar />
+        <div className='row'>
+          <NavBar />
+        </div>
 
-        <ItemListContainer/>
-
-    </div>
+        <Routes>
+          <Route path='/' element={<ItemListContainer/>}/>
+          <Route path='/category/:name' element={<ItemListContainer/>}/>
+          <Route path='/item/:id' element={<ItemDetailContainer/>}/>
+          <Route path='/compras' element={<Compras/>}/>
+          <Route path='/favoritos' element={<Favoritos/>}/>
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
