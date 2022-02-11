@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarText } from 'reactstrap';
 
 import './navBar.css';
 import cartLogo from './shopping-cart.png';
@@ -14,9 +14,7 @@ const navBar = () => {
                 light
             >   
                 <Link to={'/'}>
-                    <NavbarBrand>
                         <img className='logoImage' src={logo} alt='logo'></img>
-                    </NavbarBrand>
                 </Link>
 
                 <NavbarToggler onClick={function noRefCheck() { }} />
@@ -27,17 +25,13 @@ const navBar = () => {
 
                         <NavItem className='itemsNav'>
                             <Link to={'/favoritos'} style={{textDecoration:'none'}}>
-                                <NavLink>
                                     <h2>Favoritos</h2>
-                                </NavLink>
                             </Link>
                         </NavItem>
 
                         <NavItem className='itemsNav'>
                             <Link to={'/compras'} style={{textDecoration:'none'}}>
-                                <NavLink>
                                     <h2>Compras</h2>
-                                </NavLink>
                             </Link>
                         </NavItem>
 

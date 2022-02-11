@@ -1,0 +1,22 @@
+.stockButtons{
+    position: relative;
+    left: 45%;
+    margin: 0 0 10px 0;
+}
+.stockButtons Button{
+    margin: 0 !important;
+}
+
+.purchaseButtons{
+    position: relative;
+    left: 1%;
+}
+
+.purchaseButtons Button{
+    margin: 0 10px 0 0;
+}
+
+.purchaseButtons Button a{
+    text-decoration: none ;
+    color: rgb(255, 255, 255);
+}

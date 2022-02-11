@@ -7,6 +7,7 @@ import ItemListContainer from './components/ItemListContainer/itemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer/itemDetailContainer';
 import Compras from './views/Compras/compras';
 import Favoritos from './views/Favoritos/favoritos';
+import Cart from './views/Cart/cart'
 
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/item/:id' element={<ItemDetailContainer/>}/>
           <Route path='/compras' element={<Compras/>}/>
           <Route path='/favoritos' element={<Favoritos/>}/>
+          <Route path='/cart' element={<Cart/>}/>
         </Routes>
       </div>
     </BrowserRouter>

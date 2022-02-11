@@ -1,4 +1,8 @@
-.nav-link a{
+.categoryBar{
+    margin: 0 0 20px 0;
+}
+
+.categoryBar a{
     text-decoration: none;
     color: rgb(202, 115, 0);
 }

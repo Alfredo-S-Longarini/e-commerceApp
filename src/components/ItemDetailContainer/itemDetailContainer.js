@@ -34,7 +34,7 @@ const ItemDetailContainer = () => {
     return (
         <div className='centerDetails'>
 
-            {loading ? <Spinner/> : <ItemDetail products={productInfo}></ItemDetail>}
+                {loading ? <Spinner/> : <ItemDetail products={productInfo}></ItemDetail>}
 
         </div>
     );
