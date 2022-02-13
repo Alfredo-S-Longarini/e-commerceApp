@@ -1,0 +1,10 @@
+.productItem{
+    margin: 10px 0 !important;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid gray;
+    align-items: center;
+}
+
+.imgCartProd{
+    width: 5% !important;
+}

@@ -8,28 +8,33 @@ import ItemDetailContainer from './components/ItemDetailContainer/itemDetailCont
 import Compras from './views/Compras/compras';
 import Favoritos from './views/Favoritos/favoritos';
 import Cart from './views/Cart/cart'
+import { ProdProvider } from './Context/CartContext';
 
 
 const App = () => {
 
   return (
-    <BrowserRouter>
-      <div className="App">
+    <ProdProvider>
 
-        <div className='row'>
-          <NavBar />
+      <BrowserRouter>
+        <div className="App">
+
+          <div className='row'>
+            <NavBar />
+          </div>
+
+          <Routes>
+            <Route path='/' element={<ItemListContainer/>}/>
+            <Route path='/category/:name' element={<ItemListContainer/>}/>
+            <Route path='/item/:id' element={<ItemDetailContainer/>}/>
+            <Route path='/compras' element={<Compras/>}/>
+            <Route path='/favoritos' element={<Favoritos/>}/>
+            <Route path='/cart' element={<Cart/>}/>
+          </Routes>
         </div>
-
-        <Routes>
-          <Route path='/' element={<ItemListContainer/>}/>
-          <Route path='/category/:name' element={<ItemListContainer/>}/>
-          <Route path='/item/:id' element={<ItemDetailContainer/>}/>
-          <Route path='/compras' element={<Compras/>}/>
-          <Route path='/favoritos' element={<Favoritos/>}/>
-          <Route path='/cart' element={<Cart/>}/>
-        </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+      
+    </ProdProvider>
   );
 }
 

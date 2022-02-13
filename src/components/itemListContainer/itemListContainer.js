@@ -14,7 +14,6 @@ const ItemListContainer = () => {
 
   let name = useParams();
   let prodName=name.name;
-  console.log(prodName);
 
   useEffect(()=>{
 

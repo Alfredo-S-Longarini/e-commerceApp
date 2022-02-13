@@ -1,29 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ItemCount from '../ItemCount/itemCount';
 
 import './itemDetail.css'
 
 const ItemDetail = ({ products }) => {
-
-  const [addCart, setAddCart] = useState([]);
-
-  function onAdd(name, cant){
-    
-    if(cant > 0){
-      let prodToCart={
-        nombre: name,
-        cantidad : cant,
-      };
-  
-      setAddCart(prodToCart);
-
-      console.log("Producto Guardado");
-
-    }else{
-      console.log("Ingrese la cantidad del producto");
-    }
-
-  }
 
   return (
     <div className='container-fluid'>
@@ -51,7 +31,7 @@ const ItemDetail = ({ products }) => {
 
           <div className='countSection'>
             <p>Stock: {products.stock}</p>
-            <ItemCount key={products.id} prodName={products.name} stockProd={products.stock} addFunction={onAdd}/>
+            <ItemCount key={products.id} prodId={products.id} stockProd={products.stock}/>
           </div>
 
         </div>

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from 'reactstrap';
 import './item.css';
+import { CartContext } from '../../Context/CartContext';
 
 const Item = ({ producto}) => {
+
+    const {inTheCart} = useContext(CartContext);
 
     return (
         <div style={{margin:'20px 20px', width:'20%'}}>  
@@ -19,7 +22,7 @@ const Item = ({ producto}) => {
 
                         <CardTitle tag="h5">{producto.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">{producto.precio}</CardSubtitle>
-                        <CardText> </CardText>
+                        <CardText className='cartText'>{producto.estado}</CardText>
 
                     </CardBody>
 

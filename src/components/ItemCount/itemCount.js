@@ -1,21 +1,19 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { Link } from 'react-router-dom';
-import { InputGroup, Button, InputGroupText } from 'reactstrap';
+import { Button, InputGroupText } from 'reactstrap';
 import './itemCount.css';
+import {CartContext} from '../../Context/CartContext'
 
-const ItemCount = ({prodName, stockProd, addFunction}) => {
+const ItemCount = ({prodId, stockProd}) => {
+
+    const {addProd} = useContext(CartContext);
 
     const [counter, setCounter] = useState(0);
     const [buttonAdd, setButtonAdd] = useState(false);
     const [buttonRemove, setButtonRemove] = useState(false);
     const [maxStock, setMaxStock] = useState(stockProd);
-    const [countEnabled, setCountEnabled] = useState('');
 
     let aLlevar = counter;
-
-    const disableCount = () => {
-        setCountEnabled('none');
-    }
 
     const agregarProducto = () => {
 
@@ -65,17 +63,14 @@ const ItemCount = ({prodName, stockProd, addFunction}) => {
     return (
         <>
             <div onSubmit={onSubmit}>
-
-                <div style={{display:{countEnabled}}}>
-                    <div className='stockButtons' style={{display:'flex'}}>
-                        <Button type='submit' disabled={buttonRemove} onClick={quitarProducto}>-</Button>
-                            <InputGroupText>{counter}</InputGroupText>
-                        <Button type='submit' disabled={buttonAdd} onClick={agregarProducto}>+</Button>
-                    </div>
+                <div className='stockButtons' style={{display:'flex'}}>
+                    <Button type='submit' disabled={buttonRemove} onClick={quitarProducto}>-</Button>
+                        <InputGroupText>{counter}</InputGroupText>
+                    <Button type='submit' disabled={buttonAdd} onClick={agregarProducto}>+</Button>
                 </div>
 
                 <div className='purchaseButtons'>
-                    <Button type='button' onClick={()=>addFunction(prodName, counter)}>Agregar al carro</Button>
+                    <Button type='button' onClick={()=>addProd(prodId, counter)}>Agregar al carro</Button>
 
                     <Button>
                         <Link to={'/cart'}>
