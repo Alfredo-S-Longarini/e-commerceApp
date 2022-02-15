@@ -8,6 +8,7 @@ export const ProdProvider = ({children}) =>{
     const [productos, setProductos] = useState([]);
     const [cartProd, setCartProd] = useState([]);
     const [total, setTotal] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(()=>{
 
@@ -28,9 +29,11 @@ export const ProdProvider = ({children}) =>{
             updateProd.cantidad += cantProd;  //En el caso de que no tenga ninguno, sumo la cantidad elegida para comprar del producto y lo pusheo al array del carrito.
             cartProd.push(updateProd);
 
-            inTheCart(updateProd.id);
+            inTheCart(updateProd.id); //Indica que producto esta en el carrito y cual no.
 
             setCartProd(cartProd);
+
+            console.log(productos)
 
         }else{ 
 
@@ -45,14 +48,16 @@ export const ProdProvider = ({children}) =>{
             }
         }
 
-        modifyStock(updateProd, cantProd); //Modifico el stock del producto.
+        modifyStock(updateProd, cantProd);
 
         setTotal(totalProducts());
+
+        setTotalPrice(precioTotal());
 
         setCartProd(cartProd);
     }
 
-    const removeProd = (prodId) => {
+    const removeProd = (prodId) => { //Remueve un producto en especifico.
         const actCart = cartProd.filter((prod) => prod.id !== prodId)
         
         inTheCart(prodId);
@@ -64,13 +69,28 @@ export const ProdProvider = ({children}) =>{
 
         setTotal(totalProducts());
 
+        setTotalPrice(precioTotal());
+
     }
 
-    const clearCart = () =>{
-        setCartProd([]);
+    const clearCart = () =>{ //Elimina todos los productos del carrito y resetea valores.
+        for(let i=0; i<productos.length; i++){ 
+            productos[i].stock+=productos[i].cantidad;
+            productos[i].cantidad=0;
+            productos[i].estado='';
+        }
+
+        cartProd.length=0
+        setCartProd(cartProd);
+        setTotal(totalProducts());
+        setTotalPrice(precioTotal());
+
+        console.log(cartProd);
+        console.log(productos);
+
     }
 
-    const inTheCart =(prodId)=>{
+    const inTheCart =(prodId)=>{ //Establece si un producto se encuentra en el carrito o no.
 
         const prodInCart = productos.find((prod) => prod.id === prodId)
         if(prodInCart.estado===''){
@@ -80,14 +100,22 @@ export const ProdProvider = ({children}) =>{
         }
     }
 
-    const modifyStock =(prod, prodCart)=>{
+    const modifyStock =(prod, prodCart)=>{ //Modifica el stock del producto.
         prod.stock-=prodCart;
     }
 
-    const totalProducts=()=>{
+    const totalProducts=()=>{ //Calcula el total de los productos.
         return cartProd.reduce((acc, value) => acc + value.cantidad, 0);
     }
 
-    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, total}}>{children}</CartContext.Provider>
+    const precioTotal=()=>{ //Calcula el precio total de los productos en el carrito
+        let aPagar=0
+        for(let i=0; i<cartProd.length; i++){
+            aPagar+=(cartProd[i].cantidad*parseFloat(cartProd[i].precio));
+        }
+        return aPagar;
+    }
+
+    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, total, totalPrice}}>{children}</CartContext.Provider>
 
 }

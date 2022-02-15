@@ -42,7 +42,7 @@ const ItemListContainer = () => {
 
     }
 
-    console.log(product);
+    // console.log(product);
 
   }, [prodName]);
 

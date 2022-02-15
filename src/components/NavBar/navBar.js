@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarText } from 'reactstrap';
 
 import './navBar.css';
@@ -10,6 +10,16 @@ import { CartContext } from '../../Context/CartContext';
 const NavBar = () => {
 
     const {total} = useContext(CartContext);
+
+    const cartEnabled = () => {
+        if(total>=1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    cartEnabled();
 
     return (
         <div>
@@ -46,8 +56,10 @@ const NavBar = () => {
                             <div className='col-lg-6'>
                                 <button type='button'><Link to={'/cart'}><img className='cartImage' src={cartLogo} alt='cart'></img></Link></button>
                             </div>
-                            <div className='col-lg-6 prodsNumber'>
-                                <span>{total}</span>
+                            <div className='col-lg-6'>
+                                <div className={cartEnabled() ? "prodsNumber" : "prodsNumberDisabled"}>
+                                    <span>{total}</span>
+                                </div>
                             </div>
                         </div>
                     </NavbarText>

@@ -1,14 +1,23 @@
 import React, { useContext } from 'react'
 import { Button } from 'reactstrap';
 import ProdInCart from '../../components/ProdInCart/prodInCart'
+import EmptyCart from './EmptyCart/emptyCart'
 import './cart.css'
 
 import { CartContext } from '../../Context/CartContext'
 
 const Cart = () => {
-    const {cartProd, setCartProd, addProd, removeProd, clearCart} = useContext(CartContext);
+    const {cartProd, removeProd, clearCart, totalPrice} = useContext(CartContext);
 
     console.log(cartProd);
+
+    const cartVacio = () =>{
+        if(cartProd.length>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     return (
         <div className='container-fluid'>
@@ -19,14 +28,17 @@ const Cart = () => {
             </div>
 
             <div>
-                {
+                {cartVacio() ? 
                     cartProd.map((prod, prodId) =>{
                         return(
-                            <ProdInCart key={prodId} producto={prod} addProd={addProd} removeProd={removeProd}/>
+                            <ProdInCart key={prodId} producto={prod} removeProd={removeProd}/>
                         );
-                    })
-                }
+                    }) : <EmptyCart/>}
             </div>
+
+            {cartVacio() ? <div className='row priceSeccion'>
+                                <h4>Total: ${totalPrice}</h4>
+                            </div> : <></>}
         </div>
     )
 }

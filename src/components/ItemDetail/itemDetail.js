@@ -20,8 +20,8 @@ const ItemDetail = ({ products }) => {
           </div>
 
           <div className='prodPago'>
-            <h5>Precio Online: {products.precio}</h5>
-            <h5>Precio de Lista: {products.precioList}</h5>
+            <h5>Precio Online: ${products.precio}</h5>
+            <h5>Precio de Lista: ${products.precioList}</h5>
             <h6>12 cuotas sin interes al precio de lista</h6>
           </div>
 

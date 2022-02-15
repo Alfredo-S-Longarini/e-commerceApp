@@ -13,7 +13,7 @@ const ItemDetailContainer = () => {
 
     let id = useParams();
     let prodId=id.id;
-    console.log(prodId);
+    // console.log(prodId);
 
     useEffect(()=>{
 
@@ -29,7 +29,7 @@ const ItemDetailContainer = () => {
 
     },[]);
 
-    console.log(productInfo);
+    // console.log(productInfo);
 
     return (
         <div className='centerDetails'>

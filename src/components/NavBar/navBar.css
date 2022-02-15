@@ -39,3 +39,7 @@
 .itemsNav h2{
     color: rgb(122, 78, 20);
 }
+
+.prodsNumberDisabled{
+    display: none;
+}
