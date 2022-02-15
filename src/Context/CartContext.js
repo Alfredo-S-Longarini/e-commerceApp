@@ -7,6 +7,7 @@ export const ProdProvider = ({children}) =>{
 
     const [productos, setProductos] = useState([]);
     const [cartProd, setCartProd] = useState([]);
+    const [total, setTotal] = useState(0);
 
     useEffect(()=>{
 
@@ -46,6 +47,8 @@ export const ProdProvider = ({children}) =>{
 
         modifyStock(updateProd, cantProd); //Modifico el stock del producto.
 
+        setTotal(totalProducts());
+
         setCartProd(cartProd);
     }
 
@@ -58,6 +61,8 @@ export const ProdProvider = ({children}) =>{
         const resetCant = productos.find((prod) => prod.id === prodId)
         resetCant.stock += resetCant.cantidad
         resetCant.cantidad=0;
+
+        setTotal(totalProducts());
 
     }
 
@@ -83,6 +88,6 @@ export const ProdProvider = ({children}) =>{
         return cartProd.reduce((acc, value) => acc + value.cantidad, 0);
     }
 
-    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, totalProducts}}>{children}</CartContext.Provider>
+    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, total}}>{children}</CartContext.Provider>
 
 }

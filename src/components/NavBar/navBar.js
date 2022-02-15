@@ -1,17 +1,15 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext } from 'react';
 import { Navbar, NavbarToggler, Collapse, Nav, NavItem, NavbarText } from 'reactstrap';
-import { CartContext } from '../../Context/CartContext';
 
 import './navBar.css';
 import cartLogo from './shopping-cart.png';
 import logo from './logoPag.png';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../Context/CartContext';
 
 const NavBar = () => {
 
-    const {totalProducts} = useContext(CartContext);
-
-    console.log("Productos totales: "+totalProducts());
+    const {total} = useContext(CartContext);
 
     return (
         <div>
@@ -49,7 +47,7 @@ const NavBar = () => {
                                 <button type='button'><Link to={'/cart'}><img className='cartImage' src={cartLogo} alt='cart'></img></Link></button>
                             </div>
                             <div className='col-lg-6 prodsNumber'>
-                                <span>{totalProducts()}</span>
+                                <span>{total}</span>
                             </div>
                         </div>
                     </NavbarText>
