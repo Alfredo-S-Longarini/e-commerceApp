@@ -5,12 +5,14 @@ import './itemDetail.css'
 
 const ItemDetail = ({ products }) => {
 
+  console.log(products);
+
   return (
     <div className='container-fluid'>
       <div className='row'>
 
         <div className='col-lg-5 imagenProd'>
-          <img src={products.imgUrl} alt={products.name} style={{width:'70%'}}/>
+          <img src={products.img} alt={products.name} style={{width:'70%'}}/>
         </div>
 
         <div className='col-lg-7'>

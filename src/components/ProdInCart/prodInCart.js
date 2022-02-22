@@ -8,11 +8,11 @@ const prodInCart = ({producto, removeProd}) => {
   return (
     <div className='container-fluid'>
         <div className='row productItem'>
-            <div className='col-lg-3 imgCartProd'><CardImg src={producto.imgUrl}></CardImg></div>
+            <div className='col-lg-3 imgCartProd'><CardImg src={producto.img}></CardImg></div>
             <div className='col-lg-4'><h4>{producto.name}</h4></div>
             <div className='col-lg-3'><h4>cantidad: {producto.cantidad}</h4></div>
             <div className='col-lg-2'><h4>${producto.precio}</h4></div>
-            <div className='col-lg-2'><Button color="danger" outline onClick={()=>removeProd(producto.id)}>X</Button></div>
+            <div className='col-lg-2'><Button color="danger" outline onClick={()=>removeProd(producto.id, producto.cantidad)}>X</Button></div>
         </div>
     </div>
   )

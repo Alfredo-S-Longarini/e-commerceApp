@@ -1,6 +1,9 @@
 import React, {createContext, useEffect, useState} from "react";
 import Productos from '../productos/productos'
 
+import { collection, query, where, getDocs, doc, setDoc, updateDoc, increment } from 'firebase/firestore';
+import { db } from "../Firebase/firebaseConfig";
+
 export const CartContext = createContext();
 
 export const ProdProvider = ({children}) =>{
@@ -12,43 +15,54 @@ export const ProdProvider = ({children}) =>{
 
     useEffect(()=>{
 
-        const promiseListProd = new Promise((resolve, reject) =>{
-            resolve(Productos);
-        })
-
-        promiseListProd.then((res)=>setProductos(res)).catch((err)=>console.log(err))
+        const getProducts = async () => {
+            const q = query (collection(db, 'productosApp'));
+            const docs = [];
+            const querySnapshot = await getDocs(q);
+    
+            querySnapshot.forEach((doc) => {
+              docs.push({...doc.data(), id: doc.id});
+            }); 
+    
+            setProductos(docs);
+          }
+    
+          getProducts();
 
     },[]);
 
     const addProd = (prodId, cantProd) => {
 
         const updateProd = productos.find((product) => product.id === prodId); //Busco por id el producto en el array donde se encuantran almacenados.
+        updateProd.stock-=cantProd // Modifico el stock
 
-        if(cartProd.length===0){ //Verifico si el array del carrito contiene previamente un elemento. 
+        updateStock(prodId, updateProd.stock); // Envío en valor actual de stock para modifcarlo en firebase
 
-            updateProd.cantidad += cantProd;  //En el caso de que no tenga ninguno, sumo la cantidad elegida para comprar del producto y lo pusheo al array del carrito.
-            cartProd.push(updateProd);
+        if(cartProd.length===0){ //Verifico si el array del carrito contiene previamente un elemento.
 
-            inTheCart(updateProd.id); //Indica que producto esta en el carrito y cual no.
+            cartProd.push(updateProd); //En el caso de que no tenga ninguno, lo pusheo al array del carrito.
 
-            setCartProd(cartProd);
+            updateCant(prodId, cantProd) //Establece la cantidad de un producto en el carrito.
 
-            console.log(productos)
+        }else{
 
-        }else{ 
+            const updateCart = cartProd.find((cart) => cart === updateProd); //Si tiene previamente un elemento, busco por id el producto en el array carrito.
 
-            const updateCart = cartProd.find((cart) => cart === updateProd); //Si tiene previamente un elemento, busco por id el producto en el array carrtio.
+            if(updateCart===undefined){ //En el caso de que no esté, lo pusheo al array del carrito y sumo la cantidad elegida para comprar del producto.
 
-            if(updateCart===undefined){ //En el caso de que no esté, sumo la cantidad elegida para comprar del producto y lo pusheo al array del carrito.
-                updateProd.cantidad+=cantProd;
                 cartProd.push(updateProd);
-                inTheCart(updateProd.id);
-            }else{
-                updateProd.cantidad += cantProd;//En el caso de que esté, solamente sumo la cantidad elegida para comprar del producto.
+
+                updateCant(prodId, cantProd)
+
+            }else{ //En el caso de que esté, solamente sumo la cantidad elegida para comprar del producto.
+
+                updateCant(prodId, cantProd)
+
             }
+
         }
 
-        modifyStock(updateProd, cantProd);
+        inTheCart(prodId);
 
         setTotal(totalProducts());
 
@@ -57,15 +71,20 @@ export const ProdProvider = ({children}) =>{
         setCartProd(cartProd);
     }
 
-    const removeProd = (prodId) => { //Remueve un producto en especifico.
-        const actCart = cartProd.filter((prod) => prod.id !== prodId)
+
+    const removeProd = (prodId, cant) => { //Remueve un producto en especifico.
+        const resetStock = productos.find((prod) => prod.id === prodId)
+        resetStock.stock+=cant
+
+        updateStock(prodId, resetStock.stock);
+
+        const resetCant = cartProd.find((prod) => prod.id === prodId) //Reseteo la cantidad a 0 del producto eliminado.
+        resetCant.cantidad=0;
+
+        const actCart = cartProd.filter((prod) => prod.id !== prodId) //Creo un nuevo array sin el producto eliminado.
         
         inTheCart(prodId);
         setCartProd(actCart);
-
-        const resetCant = productos.find((prod) => prod.id === prodId)
-        resetCant.stock += resetCant.cantidad
-        resetCant.cantidad=0;
 
         setTotal(totalProducts());
 
@@ -73,11 +92,36 @@ export const ProdProvider = ({children}) =>{
 
     }
 
+    const updateCant=(prodId, cantProd)=>{
+        const cantActualizada = cartProd.find((cant) => cant.id === prodId);
+        cantActualizada.cantidad+=cantProd;
+    }
+
+    const updateStock=(productoId, stockActualizado)=>{ //Modifica el stock del producto.
+        const productRef = doc(db, "productosApp", productoId);
+
+        updateDoc(productRef, {
+            stock: stockActualizado
+        }, {merge: true})
+    }
+
     const clearCart = () =>{ //Elimina todos los productos del carrito y resetea valores.
+        
+        const resetCart=(productoId, stockActualizado, cantidadActualizada, stateActualizado)=>{
+            const productRef = doc(db, "productosApp", productoId);
+            updateDoc(productRef, {
+                stock: stockActualizado ,
+                cantidad : cantidadActualizada,
+                state: stateActualizado
+            }, {merge: true})
+        }
+
         for(let i=0; i<productos.length; i++){ 
             productos[i].stock+=productos[i].cantidad;
             productos[i].cantidad=0;
-            productos[i].estado='';
+            productos[i].estado=false;
+
+            resetCart(productos[i].id, productos[i].stock, productos[i].cantidad, productos[i].state)
         }
 
         cartProd.length=0
@@ -92,16 +136,14 @@ export const ProdProvider = ({children}) =>{
 
     const inTheCart =(prodId)=>{ //Establece si un producto se encuentra en el carrito o no.
 
-        const prodInCart = productos.find((prod) => prod.id === prodId)
-        if(prodInCart.estado===''){
-            prodInCart.estado='En Carrito'
-        }else{
-            prodInCart.estado=''
+        const prodInCart = cartProd.find((prod) => prod.id === prodId)
+        if(prodInCart){
+            if(prodInCart.state===""){
+                return prodInCart.state="En Carrito"
+            }else{
+                return prodInCart.state=""
+            }
         }
-    }
-
-    const modifyStock =(prod, prodCart)=>{ //Modifica el stock del producto.
-        prod.stock-=prodCart;
     }
 
     const totalProducts=()=>{ //Calcula el total de los productos.

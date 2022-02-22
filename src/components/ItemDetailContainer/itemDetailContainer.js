@@ -3,6 +3,9 @@ import ItemDetail from '../ItemDetail/itemDetail'
 import productos from '../../productos/productos.js';
 import Spinner from '../LoadingSpinner/loadingSpinner.js';
 
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { db } from '../../Firebase/firebaseConfig.js';
+
 import './itemDetailContainer.css'
 import { useParams } from 'react-router-dom';
 
@@ -17,19 +20,26 @@ const ItemDetailContainer = () => {
 
     useEffect(()=>{
 
-        const promiseProduct = new Promise((resolve, reject) => {
-            setTimeout(()=>{
-                let prod = productos.find(element => element.id == prodId);
-                resolve(prod);
-                setLoading(false);
-            }, 2000);
-        })
+        const getProducts = async () => {
+            const q = query (collection(db, 'productosApp'));
+            let docs = {};
+            const querySnapshot = await getDocs(q);
+    
+            querySnapshot.forEach((doc) => {
+                if(doc.id==prodId){
+                    docs={...doc.data(), id: doc.id};
+                }
+            });
+    
+            setLoading(false);
 
-        promiseProduct.then((res)=>{setProductInfo(res)}).catch((err)=> {console.log(err)});
+            setProductInfo(docs);
+        }
+    
+        getProducts();
 
     },[]);
 
-    // console.log(productInfo);
 
     return (
         <div className='centerDetails'>
