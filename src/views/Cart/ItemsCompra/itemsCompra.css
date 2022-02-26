@@ -1,0 +1,11 @@
+.cardCompra{
+    width: 20%;
+    margin: 10px 10px;
+    border-radius: 16px;
+    padding: 10px 10px;
+}
+
+.cardCompra p{
+    font-size: 20px;
+}
+

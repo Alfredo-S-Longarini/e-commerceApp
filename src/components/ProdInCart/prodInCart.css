@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.productItem h4{
+    font-size: 20px;
+}
+
 .imgCartProd{
-    width: 5% !important;
+    width: 10% !important;
 }

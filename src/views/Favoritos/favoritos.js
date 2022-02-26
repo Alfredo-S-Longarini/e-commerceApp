@@ -1,9 +1,9 @@
 import React from 'react';
 
-const favoritos = () => {
+const Favoritos = () => {
   return <div>
     <p>En esta sección se irán guardando todos aquellos productos que se marquen como favoritos (Función todavia no disponible)</p>
   </div>;
 };
 
-export default favoritos;
+export default Favoritos;

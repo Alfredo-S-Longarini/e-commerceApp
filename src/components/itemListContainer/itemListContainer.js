@@ -1,7 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import ItemList from '../ItemList/itemList.js';
-import productos from '../../productos/productos.js';
 import Spinner from '../LoadingSpinner/loadingSpinner.js';
 
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -12,7 +11,6 @@ import NavCategory from '../NavCategory/navCategory.js';
 
 const ItemListContainer = () => {
 
-  const [product, setProduct] = useState([]);
   const [loading, setLoading]=useState(true);
   const [productsData, setProductData] = useState([]);
 

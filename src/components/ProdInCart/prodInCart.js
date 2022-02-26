@@ -12,7 +12,7 @@ const prodInCart = ({producto, removeProd}) => {
             <div className='col-lg-4'><h4>{producto.name}</h4></div>
             <div className='col-lg-3'><h4>cantidad: {producto.cantidad}</h4></div>
             <div className='col-lg-2'><h4>${producto.precio}</h4></div>
-            <div className='col-lg-2'><Button color="danger" outline onClick={()=>removeProd(producto.id, producto.cantidad)}>X</Button></div>
+            <div className='col-lg-1'><Button color="danger" outline onClick={()=>removeProd(producto.id, producto.cantidad)}>X</Button></div>
         </div>
     </div>
   )

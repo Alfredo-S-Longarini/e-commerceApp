@@ -1,7 +1,6 @@
 import React, {createContext, useEffect, useState} from "react";
-import Productos from '../productos/productos'
 
-import { collection, query, where, getDocs, doc, setDoc, updateDoc, increment } from 'firebase/firestore';
+import { collection, query, getDocs, doc, updateDoc} from 'firebase/firestore';
 import { db } from "../Firebase/firebaseConfig";
 
 export const CartContext = createContext();
@@ -105,16 +104,16 @@ export const ProdProvider = ({children}) =>{
         }, {merge: true})
     }
 
+    const resetCart=(productoId, stockActualizado, cantidadActualizada, stateActualizado)=>{
+        const productRef = doc(db, "productosApp", productoId);
+        updateDoc(productRef, {
+            stock: stockActualizado ,
+            cantidad : cantidadActualizada,
+            state: stateActualizado
+        }, {merge: true})
+    }
+
     const clearCart = () =>{ //Elimina todos los productos del carrito y resetea valores.
-        
-        const resetCart=(productoId, stockActualizado, cantidadActualizada, stateActualizado)=>{
-            const productRef = doc(db, "productosApp", productoId);
-            updateDoc(productRef, {
-                stock: stockActualizado ,
-                cantidad : cantidadActualizada,
-                state: stateActualizado
-            }, {merge: true})
-        }
 
         for(let i=0; i<productos.length; i++){ 
             productos[i].stock+=productos[i].cantidad;
@@ -138,9 +137,11 @@ export const ProdProvider = ({children}) =>{
 
         const prodInCart = cartProd.find((prod) => prod.id === prodId)
         if(prodInCart){
+
             if(prodInCart.state===""){
                 return prodInCart.state="En Carrito"
-            }else{
+
+            }else if(prodInCart.state==="En Carrito"){
                 return prodInCart.state=""
             }
         }
@@ -158,6 +159,21 @@ export const ProdProvider = ({children}) =>{
         return aPagar;
     }
 
-    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, total, totalPrice}}>{children}</CartContext.Provider>
+    const compraOk=()=>{ //Funciona igual que la funcion clearCart pero la diferencia es que no modifica el stock, ya que los productos fueron comprados.
+        for(let i=0; i<productos.length; i++){ 
+            productos[i].cantidad=0;
+            productos[i].estado="";
+
+            resetCart(productos[i].id, productos[i].stock, productos[i].cantidad, productos[i].state);
+        }
+
+        cartProd.length=0
+        setCartProd(cartProd);
+        setTotal(totalProducts());
+        setTotalPrice(precioTotal());
+
+    }
+
+    return <CartContext.Provider value={{cartProd, setCartProd, addProd, removeProd, clearCart, inTheCart, total, totalPrice, compraOk}}>{children}</CartContext.Provider>
 
 }
