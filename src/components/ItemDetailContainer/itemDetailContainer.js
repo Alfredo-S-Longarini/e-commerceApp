@@ -3,7 +3,7 @@ import ItemDetail from '../ItemDetail/itemDetail'
 import productos from '../../productos/productos.js';
 import Spinner from '../LoadingSpinner/loadingSpinner.js';
 
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, getDocs } from 'firebase/firestore';
 import { db } from '../../Firebase/firebaseConfig.js';
 
 import './itemDetailContainer.css'
@@ -20,6 +20,7 @@ const ItemDetailContainer = () => {
 
     useEffect(()=>{
 
+        // Funcion que se encarga de obtener la información de los productos conectandose a la base de datos.
         const getProducts = async () => {
             const q = query (collection(db, 'productosApp'));
             let docs = {};

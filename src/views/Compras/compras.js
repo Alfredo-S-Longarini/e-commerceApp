@@ -11,8 +11,9 @@ const Compras = () => {
 
   useEffect(()=>{
 
+    // Funcion que se encarga de obtener informacion de las compras realizadas, la cual se encuentra en la colección compras de la base de datos. 
     const getCompras = async () => {
-      const q = query (collection(db, 'compras'));
+      const q = query (collection(db, "compras"));
       const docs = [];
       const querySnapshot = await getDocs(q);
   

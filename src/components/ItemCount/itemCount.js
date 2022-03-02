@@ -8,13 +8,18 @@ const ItemCount = ({prodId, stockProd}) => {
 
     const {addProd} = useContext(CartContext);
 
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(1);
     const [buttonAdd, setButtonAdd] = useState(false);
     const [buttonRemove, setButtonRemove] = useState(false);
     const [maxStock, setMaxStock] = useState(stockProd);
 
     let aLlevar = counter;
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    // Funciones que son responsables de sumar y restar la cantidad del producto que quieras agregar al carrito.
+
+    // Suma cantidad.
     const agregarProducto = () => {
 
         if (aLlevar >= 0 && maxStock > 0) {
@@ -28,9 +33,10 @@ const ItemCount = ({prodId, stockProd}) => {
 
     }
 
-    const quitarProducto = () => {
+    //Resta cantidad
+    const quitarProducto = () => { 
 
-        if (aLlevar > 0) {
+        if (aLlevar > 1) {
             setMaxStock(maxStock + 1);
             aLlevar--;
             setCounter(counter - 1);
@@ -39,6 +45,11 @@ const ItemCount = ({prodId, stockProd}) => {
             buttonDisabled();
         }
     }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    //Funciones que se encargan de desabilitar los botones + y - para vitar cantidades negativas o que superen un stock.
 
     const buttonDisabled = () => {
         setButtonRemove(true);
@@ -55,6 +66,9 @@ const ItemCount = ({prodId, stockProd}) => {
     const buttonEnabled1 = () => {
         setButtonAdd(false);
     }
+    
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     function onSubmit(e) {
         e.preventDefault();

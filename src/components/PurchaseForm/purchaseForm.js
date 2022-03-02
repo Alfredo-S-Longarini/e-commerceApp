@@ -9,12 +9,19 @@ import { addDoc, collection } from 'firebase/firestore'
 const PurchaseForm = () => {
 
     const {cartProd, totalPrice, compraOk} = useContext(CartContext);
+    const [name, setName]=useState("");
+    const [number, setNumber]=useState("");
+    const [correo, setCorreo]=useState("");
 
     console.log(cartProd);
 
     let hoy=new Date(); //Variable creada para poder obtener la fecha.
 
-    let initialState={ // Variable que contiene lo valores necesarios para la compra, con su estado inicial.
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    // Variable que contiene lo valores necesarios para la compra, con su estado inicial.
+    let initialState={ 
         comprador:{
             nombre:'',
             number:'',
@@ -32,43 +39,65 @@ const PurchaseForm = () => {
     const [buttonSend, setButtonSend] = useState(true);
     const [idCompra, setIdCompra] = useState('');
 
-    const cargaDatos =(nombre, numero, email, productos, date, totalPagar)=>{ // Función que modifica el estado inical cargando los datos obtenidos del formulario y el carrito.
-        initialState={
-            comprador:{
-                Name:nombre,
-                Number:numero,
-                Correo:email,
-            },
-        
-            items:productos,
-        
-            fecha:date,
-        
-            total:totalPagar
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    // Funcion llamada por handleOnChange para almacenar los valores del formulario y carrito, en sus respectivas variables.
+    const cargaDatos =(nombre, numero, email, productos, date, totalPagar)=>{ 
+
+        setName(nombre);
+        setNumber(numero);
+        setCorreo(email);
+
+        if((name.length>1) && (number.toString().length>1) && (correo.length>1)){
+            initialState={
+                comprador:{
+                    Name:nombre,
+                    Number:numero,
+                    Correo:email,
+                },
+            
+                items:productos,
+            
+                fecha:date,
+            
+                total:totalPagar
+            }
+
+            setButtonSend(false);
+        }else{
+            setButtonSend(true);
         }
 
         setValues(initialState);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    //Función que se encarga de recopilar la informacion del formulario, siempre y cuando este todo completo, y almacenmarla en la variable InitialState.
     const handleOnChange = () =>{
 
-        if(document.getElementById('nombreyapellido').value!==null && document.getElementById('numero').value !==null && document.getElementById('email').value!==null){
-            cargaDatos(
-                document.getElementById('nombreyapellido').value,
-                document.getElementById('numero').value,
-                document.getElementById('email').value,
-                cartProd, 
-                hoy.toLocaleDateString(),
-                totalPrice
-            )
+        
+        cargaDatos(
+            document.getElementById('nombreyapellido').value,
+            document.getElementById('numero').value,
+            document.getElementById('email').value,
+            cartProd, 
+            hoy.toLocaleDateString(),
+            totalPrice
+        )
 
-            setButtonSend(false);
+        
 
-            console.log(values);
-        }
+        console.log(values);
 
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    //Función que se encarga de almacenar la informacion tanto de la compra realizada, como la del comprador (Nombre, Número, email).
     const onSubmit = async (e) => {
 		e.preventDefault();
 		console.log(values);

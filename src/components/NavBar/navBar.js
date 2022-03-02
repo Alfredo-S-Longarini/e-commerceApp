@@ -11,6 +11,7 @@ const NavBar = () => {
 
     const {total} = useContext(CartContext);
 
+    // Función que se encarga de activar y mostrar el número equivalente a la cantidad de productos que hay en el carrito.
     const cartEnabled = () => {
         if(total>=1){
             return true;

@@ -2,33 +2,32 @@ import React from 'react'
 import { Card, CardHeader, CardBody, CardTitle, CardText, Button, CardFooter} from 'reactstrap';
 import './itemsCompra.css'
 
-const ItemsCompra = (compra) => {
+const ItemsCompra = ({compraProd}) => {
 
-    const card = compra.compra.values;
-    const prods = card.items
+    const prodCant = compraProd.values.items;
 
     return (
         <>
             <Card className='cardCompra'>
                 <CardHeader>
-                    {compra.compra.id}
+                    {compraProd.id}
                 </CardHeader>
                 <CardBody>
                     <CardTitle tag="h5">
-                        Comprador: {card.comprador.Name}
+                        Comprador: {compraProd.values.comprador.Name}
                     </CardTitle>
                     <CardText>
-                        Tel.: {card.comprador.Number}
+                        Tel.: {compraProd.values.comprador.Number}
                     </CardText>
                     <CardText>
-                        Correo: {card.comprador.Correo}
+                        Correo: {compraProd.values.comprador.Correo}
                     </CardText>
                     <Button>
-                        Productos: {prods.length}
+                        Productos: {prodCant.length}
                     </Button>
                 </CardBody>
                 <CardFooter>
-                    {card.fecha}
+                    {compraProd.values.fecha}
                 </CardFooter>
             </Card>
         </>

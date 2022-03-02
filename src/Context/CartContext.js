@@ -24,9 +24,9 @@ export const ProdProvider = ({children}) =>{
             }); 
     
             setProductos(docs);
-          }
+        }
     
-          getProducts();
+        getProducts();
 
     },[]);
 
@@ -139,10 +139,12 @@ export const ProdProvider = ({children}) =>{
         if(prodInCart){
 
             if(prodInCart.state===""){
-                return prodInCart.state="En Carrito"
+                prodInCart.state="En Carrito"
+                return "En Carrito";
 
             }else if(prodInCart.state==="En Carrito"){
-                return prodInCart.state=""
+                prodInCart.state=""
+                return "";
             }
         }
     }

@@ -19,6 +19,11 @@ const ItemListContainer = () => {
 
   useEffect(()=>{
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    // Funcion que se encarga de obtener informacion de los productos teniendo en cuenta el filtro elegido por el usuario. 
+
+    // Esta primer parte se encarga de mostrar todos los producto.
     if(prodName===undefined){
 
       const getProducts = async () => {
@@ -37,6 +42,7 @@ const ItemListContainer = () => {
 
       getProducts();
 
+      // Esta segunda parte se encarga de mostrar los productos dependiendo la categoría seleccionada.
     }else{
 
       const getProducts = async () => {

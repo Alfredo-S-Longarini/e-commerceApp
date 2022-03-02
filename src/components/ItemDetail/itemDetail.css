@@ -47,3 +47,7 @@
 .imagenProd{
     border-right: 1px solid rgb(207, 207, 207);
 }
+
+.countSection Button{
+    margin: 10px 0;
+}

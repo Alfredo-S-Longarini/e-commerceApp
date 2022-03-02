@@ -1,17 +1,19 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, CardFooter } from 'reactstrap';
-import './item.css';
+import React from 'react'
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardFooter, Button } from 'reactstrap';
+import { doc, deleteDoc } from "firebase/firestore";
+import {db} from '../../../Firebase/firebaseConfig'
 
-import { CartContext } from '../../Context/CartContext';
+const FavsCards = ({prodFav}) => {
+    const producto = prodFav.prod
 
-const Item = ({ producto}) => {
-
-    const {inTheCart} = useContext(CartContext);
+    // Función que se encarga de eliminar un producto de favoritos.
+    const deleteFav=async(idProd)=>{
+        console.log(idProd);
+        await deleteDoc(doc(db, "favoritos", idProd));
+    }
 
     return (
-        <div style={{margin:'20px 20px', width:'20%'}}>  
-            <Link to={`/item/${producto.id}`} style={{textDecoration:'none'}}>
+        <div style={{ margin: '20px 20px', width: '20%' }}>
                 <Card className='cardProducto'>
                     <CardImg
                         className='imgProducto'
@@ -23,18 +25,16 @@ const Item = ({ producto}) => {
 
                         <CardTitle tag="h5">{producto.name}</CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h6">${producto.precio}</CardSubtitle>
-                        <CardText className='cartText'>{inTheCart(producto.id)}</CardText>
-                        
+                        <Button onClick={()=>deleteFav(prodFav.id)}>Eliminar de Fav.</Button>
                     </CardBody>
 
                     <CardFooter className="text-muted">
                         Stock: {producto.stock}
                     </CardFooter>
-                    
+
                 </Card>
-            </Link>
         </div>
-    );
+    )
 }
 
-export default Item;
+export default FavsCards

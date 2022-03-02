@@ -1,11 +1,19 @@
 import React from 'react';
+import { Button } from 'reactstrap';
 import ItemCount from '../ItemCount/itemCount';
+import { db } from '../../Firebase/firebaseConfig';
+import { collection, addDoc} from 'firebase/firestore';
 
 import './itemDetail.css'
 
 const ItemDetail = ({ products }) => {
-
-  console.log(products);
+  // Funcion que se encarga de agregar un producto a favoritos asignandolo a la coleccion favoritos en la base de datos, pero verificando previamente si el prducto ya se encuantra o no.
+  const addFavorite =(prod) =>{
+    const docRef = addDoc(collection(db, 'favoritos'), {
+      prod,
+    });
+    console.log(docRef);
+  }
 
   return (
     <div className='container-fluid'>
@@ -23,7 +31,7 @@ const ItemDetail = ({ products }) => {
 
           <div className='prodPago'>
             <h5>Precio Online: ${products.precio}</h5>
-            <h5>Precio de Lista: ${products.precioList}</h5>
+            <h5>Precio de Lista: ${products.precioLista}</h5>
             <h6>12 cuotas sin interes al precio de lista</h6>
           </div>
 
@@ -34,6 +42,7 @@ const ItemDetail = ({ products }) => {
           <div className='countSection'>
             <p>Stock: {products.stock}</p>
             <ItemCount key={products.id} prodId={products.id} stockProd={products.stock}/>
+            <Button onClick={()=> addFavorite(products)}>Agregar a favoritos</Button>
           </div>
 
         </div>

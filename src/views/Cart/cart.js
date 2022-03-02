@@ -8,10 +8,11 @@ import './cart.css'
 import { CartContext } from '../../Context/CartContext'
 
 const Cart = () => {
-    const {cartProd, removeProd, clearCart, totalPrice} = useContext(CartContext);
+    const {cartProd, clearCart, totalPrice} = useContext(CartContext);
 
     console.log(cartProd);
 
+    //Función que se encarga de mostrar un mensaje si el carrito esta vacio o los productos que se hayan agregado al mismo.
     const cartVacio = () =>{
         if(cartProd.length>0){
             return true;
@@ -30,15 +31,14 @@ const Cart = () => {
 
             <div className='row'>
                 <div className='col-lg-7'>
-
-                {cartVacio() ?
-                    cartProd.map((prod, prodId) =>{
-                        return(
-                            <div className='row'>
-                                <ProdInCart key={prodId.id} producto={prod} removeProd={removeProd}/>
-                            </div>
-                        );
-                    }) : <EmptyCart/>}
+                    <div className='row'>
+                        {cartVacio() ?
+                            cartProd.map((prod) =>{
+                                return(
+                                    <ProdInCart key={prod.id} producto={prod}/>
+                                );
+                            }) : <EmptyCart/>}
+                    </div>
 
                 {cartVacio() ? <div className='row priceSeccion'> <h4>Total: ${totalPrice}</h4> </div> : <></>}
 

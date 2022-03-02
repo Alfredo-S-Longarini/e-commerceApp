@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, CardImg } from 'reactstrap';
 import './prodInCart.css'
+import { CartContext } from '../../Context/CartContext';
 
-const prodInCart = ({producto, removeProd}) => {
-  console.log(producto);
+const ProdInCart = ({producto}) => {
+
+  const {removeProd} = useContext(CartContext);
 
   return (
     <div className='container-fluid'>
@@ -18,4 +20,4 @@ const prodInCart = ({producto, removeProd}) => {
   )
 }
 
-export default prodInCart
+export default ProdInCart
