@@ -10,8 +10,6 @@ import { CartContext } from '../../Context/CartContext'
 const Cart = () => {
     const {cartProd, clearCart, totalPrice} = useContext(CartContext);
 
-    console.log(cartProd);
-
     //Función que se encarga de mostrar un mensaje si el carrito esta vacio o los productos que se hayan agregado al mismo.
     const cartVacio = () =>{
         if(cartProd.length>0){

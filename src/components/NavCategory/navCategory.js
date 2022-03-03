@@ -30,6 +30,12 @@ const NavCategory = () => {
                             </Link>
                     </NavItem>
 
+                    <NavItem className='categoryBar'>
+                            <Link to='/category/mouse'>
+                                Mouse
+                            </Link>
+                    </NavItem>
+
                 </Nav>
             </div>
 

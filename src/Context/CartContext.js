@@ -118,7 +118,7 @@ export const ProdProvider = ({children}) =>{
         for(let i=0; i<productos.length; i++){ 
             productos[i].stock+=productos[i].cantidad;
             productos[i].cantidad=0;
-            productos[i].estado=false;
+            productos[i].estado="";
 
             resetCart(productos[i].id, productos[i].stock, productos[i].cantidad, productos[i].state)
         }

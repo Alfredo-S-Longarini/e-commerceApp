@@ -1,18 +1,56 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'reactstrap';
 import ItemCount from '../ItemCount/itemCount';
 import { db } from '../../Firebase/firebaseConfig';
-import { collection, addDoc} from 'firebase/firestore';
+import { collection, query, addDoc, getDocs } from 'firebase/firestore';
 
 import './itemDetail.css'
 
 const ItemDetail = ({ products }) => {
   // Funcion que se encarga de agregar un producto a favoritos asignandolo a la coleccion favoritos en la base de datos, pero verificando previamente si el prducto ya se encuantra o no.
+  const [favs, setFavs]=useState([]);
+  
+  useEffect(()=>{
+    const listFav = async () => {
+            const q = query (collection(db, 'favoritos'));
+            let docs = [];
+            const querySnapshot = await getDocs(q);
+      
+            querySnapshot.forEach((doc) => {
+              docs.push({...doc.data()});
+            });
+      
+            setFavs(docs);
+          }
+      
+        listFav();
+  }, [])
+
   const addFavorite =(prod) =>{
-    const docRef = addDoc(collection(db, 'favoritos'), {
-      prod,
-    });
-    console.log(docRef);
+
+    if(favs.length===0){
+      const docRef = addDoc(collection(db, 'favoritos'), {
+        prod,
+      });
+
+    }else{
+
+      for(let i=0; i<favs.length; i++){
+        if(favs[i].prod.name===prod.name){
+  
+          alert("Ya se encuentra en favoritos");
+          break;
+  
+        }else{
+  
+          const docRef = addDoc(collection(db, 'favoritos'), {
+            prod,
+          });
+          break;
+        }
+      }
+
+    }
   }
 
   return (

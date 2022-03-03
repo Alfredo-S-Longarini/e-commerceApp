@@ -30,7 +30,6 @@ const Compras = () => {
 
   },[]);
 
-  console.log(comprasData);
 
   return (
     <div>

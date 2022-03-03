@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardFooter, Button } from 'reactstrap';
 import { doc, deleteDoc } from "firebase/firestore";
 import {db} from '../../../Firebase/firebaseConfig'
+import { Link } from 'react-router-dom';
 
 const FavsCards = ({prodFav}) => {
     const producto = prodFav.prod
@@ -15,12 +16,14 @@ const FavsCards = ({prodFav}) => {
     return (
         <div style={{ margin: '20px 20px', width: '20%' }}>
                 <Card className='cardProducto'>
-                    <CardImg
-                        className='imgProducto'
-                        alt={producto.name}
-                        src={producto.img}
-                        top
-                    />
+                    <Link to={`/item/${producto.id}`} style={{textDecoration:'none'}}>
+                        <CardImg
+                            className='imgProducto'
+                            alt={producto.name}
+                            src={producto.img}
+                            top
+                        />
+                    </Link>
                     <CardBody>
 
                         <CardTitle tag="h5">{producto.name}</CardTitle>

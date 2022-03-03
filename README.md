@@ -1,70 +1,74 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# E-Commerce
 
-## Available Scripts
+## Desarrollador
 
-In the project directory, you can run:
+- [@AlfredoS.Longarini](https://github.com/Alfredo-S-Longarini)
+## 
 
-### `npm start`
+![imagen](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2Ffuncionamiento.gif?alt=media&token=f3034f5a-1f7b-47f5-b814-6af507b8067e)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Buenas, este repositorio es dedicado a un E-Commerce realizado como proyecto para el curso de React.Js de CoderHouse.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+En este readme voy a comentar el funcionamiento y proceso de compra en este e-commerce.
 
-### `npm test`
+Primero que nada al entrar al sitio web se podra ver lo siguiente:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2Fhome.png?alt=media&token=98423708-e00e-4f30-8b18-cb4722864f3b)
 
-### `npm run build`
+Esta sección es el home de la página en el cual se puede ver en la parte de arriba la barra de navegación con el logo, seccion de favoritos y de compra y el carrito. Luego se pueden ver los distintos producto y a la izquierda de estos, se puede encontrar una sección con filtros. Es decir que a la hora de clickear en uno de estos se mostraran solamente los productos que pertenezcan a esa categoria seleccionada.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A la hora de clickear sobre un producto se mostrara lo siguiente:  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2FInfoProducto.png?alt=media&token=7d41497f-3214-4e86-9953-07ad0aaefa05)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### INFORMACION PRODUCTO:
 
-### `npm run eject`
+En esta sección se podra ver informacion del producto elegido y ademas se podra dar comienzo al proceso de compra. Como se puede ver abajo de la descripcion del producto, se encuentra un contador el cual determina la cantidad de unidades que se va a agregar al carrito. Los botones "+" y "-" sirven para aumentar o disminuir la cantidad ,estos botones estan configurados para no permitir la selección de cantidades negativas o nulas y ademas no pasarse del stock actual del producto. Una vez elegida la cantidad a llevar se debe clickear el botor "Agregar el carro", el cual como su nombre indica, agregará la cantidad del producto seleccionada al carro. En ese momento, al lado del carrito de la barra de navegacion se mostrara la cantidad total de productos que se encuentran en él. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2FInfoProducto2.png?alt=media&token=99134fa3-ab3c-4c7e-bafd-1a9b49e08eee)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Otro boton que se puede ver es el boton de "Terminar Compra", el cual te lleva a la sección Cart, al igual que el icono de carrtio de la barra de tareas. La seccion cart se ve de la siguiente manera: 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2Fcart.png?alt=media&token=e6abcb5b-a396-4054-8266-c4e1b92a54cc)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### CART
 
-## Learn More
+Primeramente se podrá ver el boton "Vaciar" a la derecha, el cual como su nombre lo indica, sirve para vaciar el carrtio de compras.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Luego en la parte izquierda, una lista que se va generando a medida que se asignan productos, cada producto de esta lista posee un boton "X" que permite borrar/quitar a éste del carrito, y a la derecha un formulario el cual tiene que ser llenado por el comprador.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+El boton "Finalizar" que se encuentra al final del formulario se habilitara una vez que el usuario llene todos los campos del mismo.
 
-### Code Splitting
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2FcartFinalizar.jpg?alt=media&token=6780ce18-8f25-4328-95f7-452c102665fd)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Al hacer click en el boton de "Finalizar" se mostrará un mensaje informativo en el cual se muestra que la compra se realizó correctamente y el codigo de compra. Despues de un minuto la página se actualizara y volverá a dejar el carrito vacío mostrando lo siguiente: 
 
-### Analyzing the Bundle Size
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2FcartVac%C3%ADo.png?alt=media&token=ff288e8e-278d-4711-8e9c-25bb47e9cbb6)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Esta misma pantalla se muestra cuando aún no se agregaron productos al carrito.
 
-### Making a Progressive Web App
+Para poder ver el historial de las compras realizadas se debe ir a la barra de navegacion y hacer click en "Compras" y lo llevará a la siguiente sección: 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2Fcompras.png?alt=media&token=0a959653-fce1-45ab-a7cc-22dc6b3eea39)
 
-### Advanced Configuration
+### COMPRAS 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Aquí se podrán ver todas las compras realizadas con su respectiva información.
 
-### Deployment
+Volviendo a la sección informativa de los productos, se puede ver que hay un boton que permite asignar el producto a favoritos: 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2FfavBoton.png?alt=media&token=df4c96f9-4058-45f7-a166-e13cf6b05f2b)
 
-### `npm run build` fails to minify
+Al hacer click en ese boton, el prodcuto se guarda en favoritos. Para ver esa lista, hay que ir a la barra de tarear y clickear en favoritos, lo cual mostrará lo sigueinte: 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://firebasestorage.googleapis.com/v0/b/e-commerce-app-179d9.appspot.com/o/imagenesReedme%2Ffav.png?alt=media&token=e770c5d3-3a51-4e7b-b397-3dbad028d8e6)
+
+### FAVORITOS
+
+En esta última sección se pueden ver aquellos productos que se asignaron a favoritos y ademas tambien esta la posibilidad de sacarlos mediante el boton "Eliminar de favoritos".
+
+
+Gracias!
+
+

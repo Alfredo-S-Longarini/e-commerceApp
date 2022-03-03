@@ -13,8 +13,6 @@ const PurchaseForm = () => {
     const [number, setNumber]=useState("");
     const [correo, setCorreo]=useState("");
 
-    console.log(cartProd);
-
     let hoy=new Date(); //Variable creada para poder obtener la fecha.
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -87,10 +85,6 @@ const PurchaseForm = () => {
             hoy.toLocaleDateString(),
             totalPrice
         )
-
-        
-
-        console.log(values);
 
     }
 
