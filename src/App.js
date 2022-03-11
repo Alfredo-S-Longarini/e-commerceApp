@@ -3,7 +3,7 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar/navBar';
-import ItemListContainer from './components/ItemListContainer/itemListContainer';
+import ItemListContainer from './components/itemListContainer/itemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer/itemDetailContainer';
 import Compras from './views/Compras/compras';
 import Favoritos from './views/Favoritos/favoritos';
